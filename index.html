@@ -8,24 +8,22 @@
   <title>Document</title>
 </head>
 <body>
-  <h3 id="title">КРОСС-ФУНКЦИОНАЛЬНАЯ ОЦЕНКА</h3>
-  <div class="select_block">
-  
-  
-  <select id="select" onchange="addName();">
+<h3 id="title">КРОСС-ФУНКЦИОНАЛЬНАЯ ОЦЕНКА</h3>
+<div class="select_block">
+  <select id="select" onchange="addName(value);">
     <option selected disabled>Выберите значение</option>
     <option value="Иванов">Иванов</option>
     <option value="Андреев">Андреев</option>
     <option value="Петров">Петров</option>
   </select>
-  </div>
-  <div id="bonus">
-    <p>Оставшийся лимит бонуса</p>
-    <input type='number' id="limit" value=100 readonly>
-    <p>Комментарий:</p>
-  </div>
-  <div id="surnames"></div>
-  
-  <script src="scripts.js"></script>
+</div>
+<div id="bonus">
+  <p>Оставшийся лимит бонуса</p>
+  <input type='number' id="limit" value=100 readonly>
+  <p>Комментарий:</p>
+</div>
+<div id="surnames"></div>
+
+<script src="scripts.js"></script>
 </body>
 </html>
