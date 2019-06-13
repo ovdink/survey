@@ -1,0 +1,37 @@
+#title {
+  text-align: center;
+}
+
+.select_block {
+  background-color: palegreen;
+  height: 100px;
+}
+
+#select {
+  margin-top: 70px;
+  margin-left: 10px;
+}
+
+#surnames {
+  background-color: palegreen;
+  
+}
+
+#windowSurname {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10%;
+}
+
+#windowValue #windowComment {
+  margin-left: 20px;
+}
+
+#bonus {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#limit {
+  text-align: center;
+}

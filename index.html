@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link href="styles.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h3 id="title">КРОСС-ФУНКЦИОНАЛЬНАЯ ОЦЕНКА</h3>
+  <div class="select_block">
+  
+  
+  <select id="select" onchange="addName();">
+    <option selected disabled>Выберите значение</option>
+    <option value="Иванов">Иванов</option>
+    <option value="Андреев">Андреев</option>
+    <option value="Петров">Петров</option>
+  </select>
+  </div>
+  <div id="bonus">
+    <p>Оставшийся лимит бонуса</p>
+    <input type='number' id="limit" value=100 readonly>
+    <p>Комментарий:</p>
+  </div>
+  <div id="surnames"></div>
+  
+  <script src="scripts.js"></script>
+</body>
+</html>
