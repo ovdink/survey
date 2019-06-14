@@ -27,6 +27,10 @@
   margin-left: 20px;
 }
 
+#imgDelete {
+  height: 14px;
+}
+
 #bonus {
   display: flex;
   justify-content: space-evenly;
