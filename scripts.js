@@ -35,7 +35,7 @@ function addName(value) {
 
   const surnames = document.getElementById('surnames');
   parent.setAttribute('id', Math.random().toString(32));
-  newDelete.addEventListener('click', delName);
+  newDelete.addEventListener('click', del);
 
   // surnames.appendChild(newElement);
   // surnames.appendChild(newValue);
@@ -66,14 +66,16 @@ function limit(val, wasThereANumber) {
 
 function delName(id) {
   count--;
+  let elem = document.getElementById(id);
+  console.log(id);
+  console.log(elem.firstChild);
   var op = document.getElementById('select').getElementsByTagName('option');
   for (var i = 0; i < op.length; i++) {
-  if (op[i].value == value) {
+  if (op[i].value === elem.firstChild.innerHTML) {
     op[i].removeAttribute('disabled');
   }
+  elem.parentNode.removeChild(elem);
 }
-  let elem = document.getElementById(id)
-  return elem.parentNode.removeChild(elem);
   //прибавить value удаленного человека к limitVal
   //удалить всю строку при нажатии на крестик, включая поля.
   //сделать enabled в select
@@ -82,7 +84,7 @@ function delName(id) {
 };
 
 function del() {
-  removeElement(this.id);
+  delName(this.parentNode.id);
 };
 
 function finish() {
