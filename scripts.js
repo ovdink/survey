@@ -27,25 +27,24 @@ function addName(value) {
     else
       alert('Неверное значение!');
   };
-
-  
   newElement.textContent = select.value;
+  const surnames = document.getElementById('surnames');
   surnames.appendChild(newElement);
   surnames.appendChild(newValue);
   surnames.appendChild(newComment);
   surnames.appendChild(newDelete);
 
-  newElement.setAttribute('id', 'windowSurname');
-  newValue.setAttribute('id', 'windowValue');
-  newComment.setAttribute('id', 'windowComment');
-  newDelete.setAttribute('id', 'imgDelete');
+  // для стилей - newElement.setAttribute('class', 'element');
+  newElement.setAttribute('id', Math.random().toString(32));
+  newValue.setAttribute('id', Math.random().toString(32));
+  newComment.setAttribute('id', Math.random().toString(32));
+  newDelete.setAttribute('id', Math.random().toString(32));
 
   if (count > max) {
-    alert("Превышен лимит!");
+    alert("Превышен лимит 100%. Введите меньшее значение");
   }
 
-  //сделать нажатие не на поле а на newDelete
-  newElement.addEventListener('click', delName);
+  newDelete.addEventListener('click', delName);
 };
 
 function limit(val, wasThereANumber) {
@@ -54,10 +53,20 @@ function limit(val, wasThereANumber) {
   document.getElementById('limit').value = limitVal;
 };
 
-function delName() {
+function delName(id) {
+  let name = document.getElementById(id)
+  return name.parentNode.removeChild(name);
   //прибавить value удаленного человека к limitVal
   //удалить всю строку при нажатии на крестик, включая поля.
   //сделать enabled в select
 
   //windowSurname.parentElement.removeChild(windowSurname, windowComment, windowValue);
 };
+
+function del() {
+  removeElement(this.id);
+}
+
+function finish() {
+  limitVal === 0 ? alert("Спасибо, Ваша оценка принята!") : alert("Не использован лимит 100%. Распределите лимит полностью")
+}
