@@ -4,15 +4,19 @@ let allValues = [];
 
 function addName(value) {
   count++;
-  var op = document.getElementById('select').getElementsByTagName("option");
+  if (count > max) {
+    alert("Превышен лимит 100%. Введите меньшее значение");
+  }
+  var op = document.getElementById('select').getElementsByTagName('option');
   for (var i = 0; i < op.length; i++) {
   if (op[i].value == value) {
     op[i].disabled = true;
   }
 }
+  let parent = document.createElement('div'); //главный элемент с входящими элементами
   let newElement = document.createElement('div');
   let newValue = document.createElement('input');
-  let newComment = document.createElement('input')
+  let newComment = document.createElement('input');
   let newDelete = document.createElement('img');
 
   newDelete.setAttribute('src', 'https://img.icons8.com/ios/26/000000/delete-sign.png');
@@ -28,23 +32,30 @@ function addName(value) {
       alert('Неверное значение!');
   };
   newElement.textContent = select.value;
+
   const surnames = document.getElementById('surnames');
-  surnames.appendChild(newElement);
-  surnames.appendChild(newValue);
-  surnames.appendChild(newComment);
-  surnames.appendChild(newDelete);
+  parent.setAttribute('id', Math.random().toString(32));
+  newDelete.addEventListener('click', delName);
+
+  // surnames.appendChild(newElement);
+  // surnames.appendChild(newValue);
+  // surnames.appendChild(newComment);
+  // surnames.appendChild(newDelete);
+
+  parent.appendChild(newElement);
+  parent.appendChild(newValue);
+  parent.appendChild(newComment);
+  parent.appendChild(newDelete);
+  surnames.appendChild(parent);
+
 
   // для стилей - newElement.setAttribute('class', 'element');
-  newElement.setAttribute('id', Math.random().toString(32));
-  newValue.setAttribute('id', Math.random().toString(32));
-  newComment.setAttribute('id', Math.random().toString(32));
-  newDelete.setAttribute('id', Math.random().toString(32));
+  // newElement.setAttribute('id', Math.random().toString(32));
+  // newValue.setAttribute('id', Math.random().toString(32));
+  // newComment.setAttribute('id', Math.random().toString(32));
+  // newDelete.setAttribute('id', Math.random().toString(32));
 
-  if (count > max) {
-    alert("Превышен лимит 100%. Введите меньшее значение");
-  }
-
-  newDelete.addEventListener('click', delName);
+  //newDelete.addEventListener('click', delName);
 };
 
 function limit(val, wasThereANumber) {
@@ -54,8 +65,15 @@ function limit(val, wasThereANumber) {
 };
 
 function delName(id) {
-  let name = document.getElementById(id)
-  return name.parentNode.removeChild(name);
+  count--;
+  var op = document.getElementById('select').getElementsByTagName('option');
+  for (var i = 0; i < op.length; i++) {
+  if (op[i].value == value) {
+    op[i].removeAttribute('disabled');
+  }
+}
+  let elem = document.getElementById(id)
+  return elem.parentNode.removeChild(elem);
   //прибавить value удаленного человека к limitVal
   //удалить всю строку при нажатии на крестик, включая поля.
   //сделать enabled в select
@@ -65,8 +83,8 @@ function delName(id) {
 
 function del() {
   removeElement(this.id);
-}
+};
 
 function finish() {
   limitVal === 0 ? alert("Спасибо, Ваша оценка принята!") : alert("Не использован лимит 100%. Распределите лимит полностью")
-}
+};
