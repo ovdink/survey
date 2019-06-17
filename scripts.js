@@ -1,19 +1,22 @@
-let count = 0, max = 10;
+let count = 0;
 let limitVal = Number(document.getElementById('limit').value);
+let wasThereANumber = 0;
 let allValues = [];
+let disabledValueArr = [];
 
 function addName(value) {
   count++;
-  if (count > max) {
-    alert("Превышен лимит 100%. Введите меньшее значение");
+  if (count > 10) {
+    alert('Максимальное количество не может превышать 10!');
   }
-  var op = document.getElementById('select').getElementsByTagName('option');
-  for (var i = 0; i < op.length; i++) {
+  let op = document.getElementById('select').getElementsByTagName('option');
+  for (let i = 0; i < op.length; i++) {
+  disabledValueArr[i] = op.item(i).value; // массив с фамилиями из select
   if (op[i].value == value) {
     op[i].disabled = true;
   }
 }
-  let parent = document.createElement('div'); //главный элемент с входящими элементами
+  let parent = document.createElement('div'); // главный элемент с входящими элементами
   let newElement = document.createElement('div');
   let newValue = document.createElement('input');
   let newComment = document.createElement('input');
@@ -23,18 +26,20 @@ function addName(value) {
   newValue.setAttribute('type', 'number');
 
   newValue.onchange = (e) => {
-    let wasThereANumber = allValues[value] ? allValues[value] : 0;
+    wasThereANumber = allValues[value] ? allValues[value] : 0;
     if (Number(e.target.value) - 1 < limitVal && Number(e.target.value) >= 0) {
       allValues[value] = Number(e.target.value);
       limit(allValues[value], wasThereANumber);
     }
+    else if (e.target.value > 100)
+      alert('Превышен лимит 100%. Введите меньшее значение');
     else
       alert('Неверное значение!');
   };
   newElement.textContent = select.value;
 
   const surnames = document.getElementById('surnames');
-  parent.setAttribute('id', Math.random().toString(32));
+  parent.setAttribute('id', Math.random().toString(36));
   newDelete.addEventListener('click', del);
 
   // surnames.appendChild(newElement);
@@ -56,24 +61,26 @@ function addName(value) {
   // newDelete.setAttribute('id', Math.random().toString(32));
 
   //newDelete.addEventListener('click', delName);
+  //console.log('деактивные:', op.item(1).value);
+
+  console.log('все значения', allValues['Убунтов']);
+
 };
 
+
 function limit(val, wasThereANumber) {
-  limitVal = wasThereANumber === 0 ?  limitVal : (limitVal + wasThereANumber);
+  limitVal = wasThereANumber === 0 ? limitVal : (limitVal + wasThereANumber);
   limitVal = limitVal - val;
   document.getElementById('limit').value = limitVal;
 };
 
 function delName(id) {
-  count--;
   let elem = document.getElementById(id);
-  console.log(id);
-  console.log(elem.firstChild);
-  var op = document.getElementById('select').getElementsByTagName('option');
-  for (var i = 0; i < op.length; i++) {
-  if (op[i].value === elem.firstChild.innerHTML) {
-    op[i].removeAttribute('disabled');
-  }
+  // var op = document.getElementById('select').getElementsByTagName('option');
+  // for (var i = 0; i < op.length; i++) {
+  // if (op[i].value === elem.firstChild.innerHTML) {
+  //   op[i].removeAttribute('disabled');
+  // }
   elem.parentNode.removeChild(elem);
 }
   //прибавить value удаленного человека к limitVal
@@ -81,10 +88,20 @@ function delName(id) {
   //сделать enabled в select
 
   //windowSurname.parentElement.removeChild(windowSurname, windowComment, windowValue);
-};
+
 
 function del() {
+  count--;
+  avaElem = this.parentNode.firstChild.innerHTML;
+  console.log("Удаленное значение", allValues[avaElem]);
+  for (let i = 0; i < disabledValueArr.length; i++) {
+    if (disabledValueArr[i] === avaElem) {
+      alert("anabled");
+      //disabledValueArr[i].removeAttribute('disabled');
+    }
+  }
   delName(this.parentNode.id);
+  return (allValues[avaElem]);
 };
 
 function finish() {
